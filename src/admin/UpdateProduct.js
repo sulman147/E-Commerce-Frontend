@@ -18,7 +18,7 @@ const UpdateProduct = ({ match }) => {
     error: false,
     createdProduct: "",
     redirectToProfile: false,
-    formData: ""
+    formData: "",
   });
   const [categories, setCategories] = useState([]);
 
@@ -35,11 +35,11 @@ const UpdateProduct = ({ match }) => {
     error,
     createdProduct,
     redirectToProfile,
-    formData
+    formData,
   } = values;
 
-  const init = productId => {
-    getProduct(productId).then(data => {
+  const init = (productId) => {
+    getProduct(productId).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -52,7 +52,7 @@ const UpdateProduct = ({ match }) => {
           category: data.category._id,
           shipping: data.shipping,
           quantity: data.quantity,
-          formData: new FormData()
+          formData: new FormData(),
         });
         // load categories
         initCategories();
@@ -62,7 +62,7 @@ const UpdateProduct = ({ match }) => {
 
   // load categories and set form data
   const initCategories = () => {
-    getCategories().then(data => {
+    getCategories().then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -75,18 +75,18 @@ const UpdateProduct = ({ match }) => {
     init(match.params.productId);
   }, []);
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
 
-  const clickSubmit = event => {
+  const clickSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
 
     updateProduct(match.params.productId, user._id, token, formData).then(
-      data => {
+      (data) => {
         if (data.error) {
           setValues({ ...values, error: data.error });
         } else {
@@ -100,7 +100,7 @@ const UpdateProduct = ({ match }) => {
             loading: false,
             error: false,
             redirectToProfile: true,
-            createdProduct: data.name
+            createdProduct: data.name,
           });
         }
       }

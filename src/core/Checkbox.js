@@ -5,7 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const Checkboxc = ({ categories, handleFilters }) => {
   const [checked, setchecked] = useState([]);
-  const handleToggle = c => () => {
+  const handleToggle = (c) => () => {
     const currentCategoryId = checked.indexOf(c); //return the first index or-1
     const newCheckedCategoryId = [...checked];
     // if currently checked was not already in checked state > push
